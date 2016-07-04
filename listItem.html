@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/listItem.css"> 
+	<script type="text/javascript" src="html.fontSize.js"></script>
+	<!-- <script type="text/javascript" src="js/zepto.js"></script> -->
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+</head>
+<body>
+	<header class="HeaderNav">
+		<div class="TalionNav">
+			<a href="img/logo.png"><h1>豆瓣</h1></a>
+			<nav>
+				<ul>
+					<li><a href="" style="color:#2384E8;">电影</a></li>
+					<li><a href="" style="color:#9F7860;">图书</a></li>
+					<li><a href="" style="color:#E4A813;">广播</a></li>
+					<li><a href="" style="color:#2AB8CC;">小组</a></li>
+				</ul>
+				<span id="Search"></span>
+			</nav>
+		</div>	
+		<div class="TalioSeach">
+			<form action="" method="GET">
+				<input name="seach" type="search"/>
+			</form>
+			<ul>
+				<li><a href="" target="_blank"><strong style="color: rgb(35, 132, 232);">电影</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(122, 106, 219);">电视</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(159, 120, 96);">图书</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(230, 70, 126);">同城</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(228, 168, 19);">小事</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(42, 184, 204);">小组</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(244, 143, 46);">音乐</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(159, 120, 96);">阅读</strong><span>影院热映</span></a></li>
+				<li><a href="" target="_blank"><strong style="color: rgb(87, 116, 197);">游戏</strong><span>影院热映</span></a></li>
+			</ul>
+		</div>	
+		<div class="TalioLayer"></div>
+	</header>
+	<div class="search">
+		<form action="" id="search_form" method="get">
+			<input class="search_inp" type="text" name="query" placeholder="搜索 书 / 影 / 音 / 标签" value="可爱">
+			<a href="javascript:;" class="button_search">搜索</a>
+		</form>
+	</div>
+	<div class="search_tags">
+		<span>标签：</span>
+		<ul>
+			<!-- <li><a href="">可爱</a></li>
+			<li><a href="">可爱</a></li> -->
+		</ul>
+	</div>
+	<div class="search_result">
+		<div class="search_module">
+			<span class="search-results-name">影视</span>
+			<ul class="search_results_subjects">
+				<!-- <li class="search_results_item">
+					<a href="">
+						<img src="img/11.jpg">
+						<div class="subject-info">
+							<span class="subject-title">可爱的诅咒</span>
+							<div class="rating">
+								<ul class="rating_stars">
+									<li class="rating-star"></li>
+									<li class="rating-star"></li>
+									<li class="rating-star"></li>
+									<li class="rating-star"></li>
+									<li class="rating-star"></li>
+								</ul>
+								<span>6.6</span>
+							</div>
+						</div>
+					</a>
+				</li> -->
+			</ul>
+			<a href="" class="more">更多影视结果...</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/search.js"></script>
+	<script type="text/javascript">
+		// console.log(window.location.search.split('=')[1])
+		//跳转过来的数据
+		var sVal = window.location.search.split('=')[1];
+		var unCode = decodeURI(decodeURI(sVal));  
+		var aTag = $('<li><a href="">'+unCode+'</a></li>');
+		$('.search_tags ul').append(aTag);
+		$('.search_inp').val(unCode);
+
+		$.getJSON('http://api.douban.com/v2/movie/search?q='+unCode+'&start=0&count=3&callback=?', function(data) {
+			// console.log(data.subjects);
+			var item = data.subjects;
+			for (var i = 0; i < item.length; i++) {
+				var aLi = $('<li class="search_results_item"><a href="'+item[i].alt+'"><img src="'+item[i].images.large+'"><div class="subject-info"><span class="subject-title">'+item[i].title+'</span><div class="rating"><ul class="rating_stars" data-rating="'+item[i].rating.stars+'"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+item[i].rating.average+'</span></div></div></a></li>');
+				$('.search_results_subjects').append(aLi);
+			};
+
+			$('.rating_stars').each(function(i,elem){
+				var num = $(this).data("rating");
+				if (num>=10) {
+					$(this).find('li:lt(1)').addClass('yellow-star');
+				}
+				if (num>=20) {
+					$(this).find('li:lt(2)').addClass('yellow-star');
+				}
+				if (num>=30) {
+					$(this).find('li:lt(3)').addClass('yellow-star');
+				}
+				if (num>=40) {
+					$(this).find('li:lt(4)').addClass('yellow-star');
+				}
+			})
+			
+		});
+	</script>
+</body>
+</html>
