@@ -74,8 +74,14 @@
 			<h2><span class="title"></span>的剧情简介</h2>
 			<div class="intro">
 				<p></p>
-				<a href="javascript:;">(展开)</a>
+				<a href="javascript:;" class="more">(展开)</a>
 			</div>
+		</section>
+		<section class="subject_tag">
+			<p>豆瓣成员常用的标签</p>
+			<ul >
+				<!-- <li><a href="">美国</a></li> -->
+			</ul>
 		</section>
 		<section class="subject_pics">
 			<h2><span class="title"></span>的预告片(46)和图片(286)</h2>
@@ -89,13 +95,16 @@
 				</ul>
 			</div>
 		</section>
+		<section class="subject_comments">
+			<h2></h2>
+		</section>
 	</div>
 
 	<script type="text/javascript" src="js/search.js"></script>
 	<script type="text/javascript">
 		var idVal = window.location.search.split('=')[1];
 		$.getJSON('http://api.douban.com/v2/movie/subject/'+idVal+'?a=1&callback=?',function(data){
-			console.log(data)
+			// console.log(data)
 			$('h1').text(data.title+data.original_title); //题目
 			$('.num').text(data.rating.average); //分数
 			$('.comment').text(data.ratings_count+'评分'); //评分
@@ -130,11 +139,19 @@
 					casts+= elem.name+' / '; 
 				};
 			});
-			$('.describe').text(directors+'(导演) / '+casts);
+			$('.describe').text(genres+directors+'(导演) / '+casts);
 			//剧情简介
 			$('.title').text(data.title);//电影名称
-			$('.intro p').text(data.summary.substr(0,75)+'...')
-		})
+			$('.intro p').text(data.summary.substr(0,75)+'...');
+			//点击展开
+			$('.more').on("click",function(){
+				$('.more').hide();
+				$('.intro p').text(data.summary);
+			})
+			//豆瓣常用标签
+			var county = $('<li><a href="">'+data.countries[0]+'</a></li><li><a href="">'+data.genres[0]+'</a></li><li><a href="">'+data.year+'</a></li><li><a href="">'+data.genres[2]+'</a></li><li><a href="">'+data.genres[1]+'</a></li>');
+			$('.subject_tag ul').append(county);
+		});
 	</script>
 </body>
 </html>

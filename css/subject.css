@@ -9,11 +9,16 @@ h1{
     word-break: break-all;
     font-weight: normal;
 }
-/*subject_info*/
-.subject_info{
+h2{
+	font-size: 0.45rem;
+	color:#aaa;
+	margin-bottom: 20px;
+}
+section{
 	margin-bottom: 30px;
 	overflow: hidden;
 }
+/*subject_info*/
 .subject_info .left{
 	width: 65%;
 	float: left;
@@ -55,15 +60,26 @@ h1{
 	background-image: url(../img/star.png);
 	background-size: cover;
 }
-/*subject_intro*/
-h2{
+/*subject_tag*/
+.subject_tag li{
+    display: inline-block;
+    margin: 10px 10px 0 0;
+}
+.subject_tag li a{
+	font-size: 0.46rem;
+	line-height: 28px;
+    padding: 0 12px;
+    border-radius: 28px;
+    text-align: center;
+    color: #494949;
+    background: #f5f5f5;
+    display: block;
+}
+.subject_tag p{
 	font-size: 0.45rem;
 	color:#aaa;
-	margin-bottom: 20px;
 }
-.subject_intro{
-	margin-bottom: 40px;
-}
+/*subject_intro*/
 .subject_intro .intro{
 	font-size: 0.46rem;
 	overflow: hidden;

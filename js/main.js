@@ -26,7 +26,7 @@ $(function(){
 	$.getJSON('http://api.douban.com/v2/movie/coming_soon?start=0&count=8&callback=?', function(data) {
 		var itemArr = data.subjects;
 		for (var i = 0; i < itemArr.length; i++) {
-			var aLi = $('<li class="item item_movie"><a href=""><img src="'+itemArr[i].images.large+'"><p>'+itemArr[i].title+'</p><div class="item_rating" data-rating="'+itemArr[i].rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+itemArr[i].rating.average+'</span></div></a></li>');
+			var aLi = $('<li class="item item_movie"><a href="subject.html?subject='+itemArr[i].id+'"><img src="'+itemArr[i].images.large+'"><p>'+itemArr[i].title+'</p><div class="item_rating" data-rating="'+itemArr[i].rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+itemArr[i].rating.average+'</span></div></a></li>');
 			$('#move_soon .items').append(aLi);	
 		};
 		// $('#move_soon .item_rating').each(function(i,elem){
@@ -49,7 +49,7 @@ $(function(){
 	$.getJSON('http://api.douban.com/v2/movie/us_box?callback=?', function(data) {
 		var itemArr = data.subjects;
 		for (var i = 0; i < itemArr.length; i++) {
-			var aLi = $('<li class="item item_movie"><a href=""><img src="'+itemArr[i].subject.images.large+'"><p>'+itemArr[i].subject.title+'</p><div class="item_rating" data-rating="'+itemArr[i].subject.rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+itemArr[i].subject.rating.average+'</span></div></a></li>');
+			var aLi = $('<li class="item item_movie"><a href="subject.html?subject='+itemArr[i].subject.id+'"><img src="'+itemArr[i].subject.images.large+'"><p>'+itemArr[i].subject.title+'</p><div class="item_rating" data-rating="'+itemArr[i].subject.rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+itemArr[i].subject.rating.average+'</span></div></a></li>');
 			$('#new_move .items').append(aLi);
 		};
 		$('#new_move .item_rating').each(function(i,elem){

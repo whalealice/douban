@@ -10,7 +10,7 @@ $(function(){
 		// console.log(data.subjects);
 		var item = data.subjects;
 		for (var i = 0; i < item.length; i++) {
-			var aLi = $('<li class="search_results_item"><a href="'+item[i].alt+'"><img src="'+item[i].images.large+'"><div class="subject-info"><span class="subject-title">'+item[i].title+'</span><div class="rating"><ul class="rating_stars" data-rating="'+item[i].rating.stars+'"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+item[i].rating.average+'</span></div></div></a></li>');
+			var aLi = $('<li class="search_results_item"><a href="subject.html?subject='+item[i].id+'"><img src="'+item[i].images.large+'"><div class="subject-info"><span class="subject-title">'+item[i].title+'</span><div class="rating"><ul class="rating_stars" data-rating="'+item[i].rating.stars+'"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+item[i].rating.average+'</span></div></div></a></li>');
 			$('.search_results_subjects').append(aLi);
 		};
 
