@@ -1,4 +1,8 @@
 $(function(){
+	//判断点击的是哪一个选项的更多
+	$('#move_show a').attr({
+		'href': 'morelist.html'+'?search=in_theaters'
+	});
 	//院线热映的数据
 	$.getJSON('http://api.douban.com/v2/movie/in_theaters?start=0&count=8&callback=?', function(data) {
 		var itemArr = data.subjects;	
