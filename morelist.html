@@ -50,14 +50,6 @@
 		    }
 		</script>
 	</header>
-	 <!-- body 顶部加上如下代码 -->
-	<div class="weui-pull-to-refresh-layer" style="display: none">
-		<div class="pull-to-refresh-arrow"></div> <!-- 上下拉动的时候显示的箭头 -->
-		<div class="pull-to-refresh-preloader"></div> <!-- 正在刷新的菊花 -->
-		<div class="down">下拉刷新</div><!-- 下拉过程显示的文案 -->
-		<div class="up">释放刷新</div><!-- 下拉超过50px显示的文案 -->
-		<div class="refresh">正在刷新...</div><!-- 正在刷新时显示的文案 -->
-	</div>
 	<div class="card">
 		<h1>影院热映</h1>
 		<section class="list">
@@ -81,39 +73,6 @@
 	<script type="text/javascript" src="html.fontSize.js"></script>
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="js/search.js"></script>
-	<script type="text/javascript" src="js/up.js"></script>
-	<script type="text/javascript">
-		var idVal = window.location.search.split('=')[1];
-		$.getJSON('http://api.douban.com/v2/movie/'+idVal+'?start=0&count=9&callback=?',function(data){
-			var list = data.subjects;
-			for (var i = 0; i < list.length; i++) {
-				console.log(list[i].rating)
-				var aItem = $('<a href="subject.html?subject='+list[i].id+'" class="item"><img src="'+list[i].images.large+'"><p>'+list[i].title+'</p><div class="item_rating" data-rating="'+list[i].rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+list[i].rating.average+'</span></div></a>');
-				$('.list').append(aItem);
-			};
-			$('.list .item_rating').each(function(i,elem){
-				var num = $(this).data("rating");
-				if (num>=10) {
-					$(this).find('li:lt(1)').addClass('yellow-star');
-				};
-				if (num>=20) {
-					$(this).find('li:lt(2)').addClass('yellow-star');
-				};
-				if (num>=30) {
-					$(this).find('li:lt(3)').addClass('yellow-star');
-				};
-				if (num>=40) {
-					$(this).find('li:lt(4)').addClass('yellow-star');
-				};
-			});
-			
-		})
-		$(document.body).pullToRefresh();
-		$(document.body).on("pull-to-refresh", function() {
-		  //do something
-		  alert(1)
-		});
-		$(document.body).pullToRefreshDone();
-	</script>
+	<script type="text/javascript" src="js/morelist.js"></script>
 </body>
 </html>

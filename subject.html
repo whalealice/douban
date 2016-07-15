@@ -110,20 +110,20 @@
 			$('.comment').text(data.ratings_count+'评分'); //评分
 			//评分的星星
 			var num = data.rating.stars;
-			$('.rating_stars').each(function(i,elem){
-				if (num>=10) {
-					$(this).find('li:lt(1)').addClass('yellow-star');
-				};
-				if (num>=20) {
-					$(this).find('li:lt(2)').addClass('yellow-star');
-				};
-				if (num>=30) {
-					$(this).find('li:lt(3)').addClass('yellow-star');
-				};
-				if (num>=40) {
-					$(this).find('li:lt(4)').addClass('yellow-star');
-				};
-			});
+			// $('.rating_stars').each(function(i,elem){
+			// 	if (num>=10) {
+			// 		$(this).find('li:lt(1)').addClass('yellow-star');
+			// 	};
+			// 	if (num>=20) {
+			// 		$(this).find('li:lt(2)').addClass('yellow-star');
+			// 	};
+			// 	if (num>=30) {
+			// 		$(this).find('li:lt(3)').addClass('yellow-star');
+			// 	};
+			// 	if (num>=40) {
+			// 		$(this).find('li:lt(4)').addClass('yellow-star');
+			// 	};
+			// });
 			//海报
 			var $photoImg = $('<a href=""><img src="'+data.images.large+'"></a>');
 			$('.right').append($photoImg);

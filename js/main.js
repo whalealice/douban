@@ -1,4 +1,10 @@
 $(function(){
+	function go(){
+        var val = $('#searchValue').val();
+        var code = encodeURI(val);
+        $('#form').attr('action','listItem.html?search='+code+'');
+        return true;
+    }
 	//判断点击的是哪一个选项的更多
 	$('#move_show a').attr({
 		'href': 'morelist.html'+'?search=in_theaters'
@@ -13,16 +19,22 @@ $(function(){
 		$('#move_show .item_rating').each(function(i,elem){
 			var num = $(this).data("rating");
 			if (num>=10) {
-				$(this).find('li:lt(1)').addClass('yellow-star');
+				$(this).find('li').first().addClass('yellow-star');
 			};
 			if (num>=20) {
-				$(this).find('li:lt(2)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
 			};
 			if (num>=30) {
-				$(this).find('li:lt(3)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
+				$(this).find('li').eq(2).addClass('yellow-star');
 			};
 			if (num>=40) {
-				$(this).find('li:lt(4)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
+				$(this).find('li').eq(2).addClass('yellow-star');
+				$(this).find('li').eq(3).addClass('yellow-star');
 			};
 		});
 	});
@@ -59,16 +71,22 @@ $(function(){
 		$('#new_move .item_rating').each(function(i,elem){
 			var num = $(this).data("rating");
 			if (num>=10) {
-				$(this).find('li:lt(1)').addClass('yellow-star');
+				$(this).find('li').first().addClass('yellow-star');
 			};
 			if (num>=20) {
-				$(this).find('li:lt(2)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
 			};
 			if (num>=30) {
-				$(this).find('li:lt(3)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
+				$(this).find('li').eq(2).addClass('yellow-star');
 			};
 			if (num>=40) {
-				$(this).find('li:lt(4)').addClass('yellow-star');
+				$(this).find('li').eq(0).addClass('yellow-star');
+				$(this).find('li').eq(1).addClass('yellow-star');
+				$(this).find('li').eq(2).addClass('yellow-star');
+				$(this).find('li').eq(3).addClass('yellow-star');
 			};
 		});
 	});
