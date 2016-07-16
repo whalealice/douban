@@ -1,12 +1,10 @@
-.card{
-	margin-top: 47px;
-}
-h1{
+
+.title{
 	font-size: 0.7rem;
 	height: 70px;
 	line-height: 70px;
 	font-weight: normal;
-	padding: 0 0.5rem;
+	text-indent: 0.5rem;
 }
 .list{
 	height: 100%;
