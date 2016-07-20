@@ -8,9 +8,11 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css"> 
-	<script type="text/javascript" src="html.fontSize.js"></script>
 	<script type="text/javascript" src="js/zepto.min.js"></script>
-	<!-- <script type="text/javascript" src="js/jquery-1.11.1.js"></script> -->
+	<script type="text/javascript" src="html.fontSize.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 	<header class="HeaderNav">
@@ -27,7 +29,7 @@
 			</nav>
 		</div>	
 		<div class="TalioSeach">
-			<form  name="form" action="" method="post" id="form" onsubmit="return go()">
+			<form  name="form" action="" method="post" id="form">
 				<input type="search" id="searchValue"/>
 			</form>
 			<ul>
@@ -46,31 +48,75 @@
 	</header>
 	<div class="card">
 		<section id="move_show">
+		</section>
+		<script type="text/html" id="show">
 			<header>
 				<h2>影院热映</h2>
 				<a href="">更多</a>
 			</header>
 			<div class="section_content">
 				<ul class="items">
-					<!-- <li class="item item_movie">
-						<a href="">
-							<img src="img/11.jpg">
-							<p>惊天魔盗团2</p>
-							<div class="item_rating">
-								<ul class="rating_stars">
-									<li class="rating-star"></li>
-									<li class="rating-star"></li>
-									<li class="rating-star"></li>
-									<li class="rating-star"></li>
-									<li class="rating-star"></li>
-								</ul>
-								<span>6.6</span>
-							</div>	
-						</a>
-					</li> -->
+					{{each subjects as value i}}
+						<li class="item item_movie">
+							<a href="https://m.douban.com/movie/">
+								<img src="{{value.images.large}}">
+								<p>{{value.title}}</p>
+								<div class="item_rating" data-rating={{value.rating.stars}}>
+									<ul class="rating_stars">
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+									</ul>
+									<span>{{value.rating.average}}</span>
+								</div>	
+							</a>
+						</li>
+					{{/each}} 
 				</ul>
 			</div>	
-		</section>
+		</script>
+		<script type="text/javascript">
+			//院线热映的数据
+			$.getJSON('http://api.douban.com/v2/movie/in_theaters?start=0&count=8&callback=?', function(data) {
+				console.log(data.subjects)	
+				var showhtml = template('show',data);
+				document.getElementById('move_show').innerHTML= showhtml;
+			});
+			
+			console.log($('#move_show .item_rating').length)
+			// $('#move_show .item_rating').each(function(i,elem){
+			// 	var num = $(this).data("rating");
+			// 	numStart($(this),num);
+			// });
+			// function numStart(obj,num){
+			// 	if (num==00) {
+			// 		obj.html('暂无评分')
+			// 	}
+			// 	if (num>=10) {
+			// 		obj.find('li').first().addClass('yellow-star');
+			// 	};
+			// 	if (num>=20) {
+			// 		obj.find('li').eq(0).addClass('yellow-star');
+			// 		obj.find('li').eq(1).addClass('yellow-star');
+			// 	};
+			// 	if (num>=30) {
+			// 		obj.find('li').eq(0).addClass('yellow-star');
+			// 		obj.find('li').eq(1).addClass('yellow-star');
+			// 		obj.find('li').eq(2).addClass('yellow-star');
+			// 	};
+			// 	if (num>=40) {
+			// 		obj.find('li').eq(0).addClass('yellow-star');
+			// 		obj.find('li').eq(1).addClass('yellow-star');
+			// 		obj.find('li').eq(2).addClass('yellow-star');
+			// 		obj.find('li').eq(3).addClass('yellow-star');
+			// 	};
+			// };
+		</script>
+
+
+
 		<section id="move_soon">
 			<header>
 				<h2>即将上映</h2>
@@ -90,8 +136,7 @@
 			</div>	
 		</section>
 	</div>
-	<script type="text/javascript" src="js/search.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	
 	
 </body>
 </html>
