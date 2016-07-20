@@ -7,6 +7,7 @@ $(function(){
         return true;
     }
 	var idVal = window.location.search.split('=')[1];
+
 	$.getJSON('http://api.douban.com/v2/movie/'+idVal+'?start=0&count=9&callback=?',function(data){
 		var list = data.subjects;
 		for (var i = 0; i < list.length; i++) {
@@ -20,11 +21,10 @@ $(function(){
 		
 	});
 	var num = 1;
-	var loading = false;
+	loading = false;
 	$(document.body).infinite().on("infinite", function() {
 		if(loading) return;
 		loading = true;
-		
 		$.getJSON('http://api.douban.com/v2/movie/'+idVal+'?start='+(num*9)+'&count='+(num*9+9)+'&callback=?',function(data){
 			num++;
 			if (num*9+9>data.total) {
@@ -46,22 +46,6 @@ $(function(){
 		});
 		
 	});
-	
-	function ajaxData(){
-		num++;
-		$.getJSON('http://api.douban.com/v2/movie/'+idVal+'?start='+(num*12)+'&count='+(num*12+12)+'&callback=?',function(data){
-			var list = data.subjects;
-			for (var i = 0; i < list.length; i++) {
-				var aItem = $('<a href="subject.html?subject='+list[i].id+'" class="item"><img src="'+list[i].images.large+'"><p>'+list[i].title+'</p><div class="item_rating" data-rating="'+list[i].rating.stars+'"><ul class="rating_stars"><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li><li class="rating-star"></li></ul><span>'+list[i].rating.average+'</span></div></a>');
-				$('.list').append(aItem);
-			};
-			$('.list .item_rating').each(function(i,elem){
-				var nums = $(this).data("rating");
-				numStart($(this),nums);
-			});
-			loading = false;
-		});
-	};
 
 	function numStart(obj,num){
 		if (num>=10) {

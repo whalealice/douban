@@ -1,4 +1,4 @@
-$$(function(){
+$(function(){
 	var idVal = window.location.search.split('=')[1];
 	$.getJSON('http://api.douban.com/v2/movie/subject/'+idVal+'?a=1&callback=?',function(data){
 		// console.log(data)
