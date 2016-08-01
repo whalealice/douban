@@ -90,13 +90,16 @@
 	text-indent: 10%;
 }
 .subject-info{
-	float: left;
-	margin-left: 10px;
+	padding:10px 10px 0 50px;
+	display: block;
 }
 .subject-title{
 	display: block;
 	font-size: 0.5rem;
 	color:#494949;
+	overflow: hidden;
+	white-space: norwap;
+	text-overflow:ellipsis;
 }
 
 .rating{

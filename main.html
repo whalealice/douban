@@ -9,9 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css"> 
 	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
 	<script type="text/javascript" src="html.fontSize.js"></script>
 	<script type="text/javascript" src="js/search.js"></script>
-	<script type="text/javascript" src="js/template.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -47,18 +47,17 @@
 		<div class="TalioLayer"></div>
 	</header>
 	<div class="card">
-		<section id="move_show">
-		</section>
+		<section id="move_show"></section>
 		<script type="text/html" id="show">
 			<header>
 				<h2>影院热映</h2>
-				<a href="">更多</a>
+				<a href="morelist.html?search=in_theaters">更多</a>
 			</header>
 			<div class="section_content">
 				<ul class="items">
 					{{each subjects as value i}}
 						<li class="item item_movie">
-							<a href="https://m.douban.com/movie/">
+							<a href="subject.html?subject={{value.id}}">
 								<img src="{{value.images.large}}">
 								<p>{{value.title}}</p>
 								<div class="item_rating" data-rating={{value.rating.stars}}>
@@ -77,64 +76,66 @@
 				</ul>
 			</div>	
 		</script>
-		<script type="text/javascript">
-			//院线热映的数据
-			$.getJSON('http://api.douban.com/v2/movie/in_theaters?start=0&count=8&callback=?', function(data) {
-				console.log(data.subjects)	
-				var showhtml = template('show',data);
-				document.getElementById('move_show').innerHTML= showhtml;
-			});
-			
-			console.log($('#move_show .item_rating').length)
-			// $('#move_show .item_rating').each(function(i,elem){
-			// 	var num = $(this).data("rating");
-			// 	numStart($(this),num);
-			// });
-			// function numStart(obj,num){
-			// 	if (num==00) {
-			// 		obj.html('暂无评分')
-			// 	}
-			// 	if (num>=10) {
-			// 		obj.find('li').first().addClass('yellow-star');
-			// 	};
-			// 	if (num>=20) {
-			// 		obj.find('li').eq(0).addClass('yellow-star');
-			// 		obj.find('li').eq(1).addClass('yellow-star');
-			// 	};
-			// 	if (num>=30) {
-			// 		obj.find('li').eq(0).addClass('yellow-star');
-			// 		obj.find('li').eq(1).addClass('yellow-star');
-			// 		obj.find('li').eq(2).addClass('yellow-star');
-			// 	};
-			// 	if (num>=40) {
-			// 		obj.find('li').eq(0).addClass('yellow-star');
-			// 		obj.find('li').eq(1).addClass('yellow-star');
-			// 		obj.find('li').eq(2).addClass('yellow-star');
-			// 		obj.find('li').eq(3).addClass('yellow-star');
-			// 	};
-			// };
-		</script>
 
-
-
-		<section id="move_soon">
+		<section id="move_soon"></section>
+		<script type="text/html" id="soon">
 			<header>
 				<h2>即将上映</h2>
-				<a href="morelist.html">更多</a>
+				<a href="morelist.html?search=in_theaters">更多</a>
 			</header>
 			<div class="section_content">
-				<ul class="items"></ul>
+				<ul class="items">
+					{{each subjects as value i}}
+						<li class="item item_movie">
+							<a href="subject.html?subject={{value.id}}">
+								<img src="{{value.images.large}}">
+								<p>{{value.title}}</p>
+								<div class="item_rating" data-rating={{value.rating.stars}}>
+									<ul class="rating_stars">
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+									</ul>
+									<span>{{value.rating.average}}</span>
+								</div>	
+							</a>
+						</li>
+					{{/each}} 
+				</ul>
 			</div>	
-		</section>
-		<section id="new_move">
+		</script>
+
+		<section id="new_move"></section>
+		<script type="text/html" id="new">
 			<header>
-				<h2>新片速递</h2>
-				<a href="">更多</a>
+				<h2>即将上映</h2>
+				<a href="morelist.html?search=in_theaters">更多</a>
 			</header>
 			<div class="section_content">
-				<ul class="items"></ul>
+				<ul class="items">
+					{{each subjects as value}}
+						<li class="item item_movie">
+							<a href="subject.html?subject={{value.id}}">
+								<img src={{value.subject.images.large}}>
+								<p>{{value.subject.title}}</p>
+								<div class="item_rating" data-rating={{value.subject.rating.stars}} >
+									<ul class="rating_stars">
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+										<li class="rating-star"></li>
+									</ul>
+									<span>{{value.subject.rating.average}}</span>
+								</div>	
+							</a>
+						</li>
+					{{/each}}
+				</ul>
 			</div>	
-		</section>
+		</script>
 	</div>
 	
 	

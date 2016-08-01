@@ -1,14 +1,5 @@
 $(function(){
 	//搜索提交转码
-	$('#form').bind("submit",function(){
-		go();
-	});
-	function go(){
-        var val = $('#searchValue').val();
-        var code = encodeURI(encodeURI(val));
-        $('#form').attr('action','listItem.html?search='+code+'');
-        return true;
-    }
 	var idVal = window.location.search.split('=')[1];
 	$.getJSON('http://api.douban.com/v2/movie/'+idVal+'?start=0&count=9&callback=?',function(data){
 		var list = data.subjects;

@@ -1,9 +1,61 @@
 $(function(){
-	
-	//判断点击的是哪一个选项的更多
-	$('#move_show a').attr({
-		'href': 'morelist.html?search=in_theaters'
+	//院线热映的数据
+	$.getJSON('http://api.douban.com/v2/movie/in_theaters?start=0&count=8&callback=?', function(data) {
+		var showhtml = template('show',data);
+		document.getElementById('move_show').innerHTML= showhtml;
+		$('#move_show').find('.item_rating').each(function(i,elem){
+			var num = $(this).data("rating");
+			numStart($(this),num);
+		});
 	});
+	//即将上映的数据
+	$.getJSON('http://api.douban.com/v2/movie/coming_soon?start=0&count=8&callback=?', function(data) {
+		var showhtml = template('soon',data);
+		document.getElementById('move_soon').innerHTML= showhtml;
+		$('#move_soon').find('.item_rating').each(function(i,elem){
+			var num = $(this).data("rating");
+			numStart($(this),num);
+		});
+	});
+	//新片的数据
+	$.getJSON('http://api.douban.com/v2/movie/us_box?callback=?', function(data) {
+		var show = template('new',data);
+		document.getElementById('new_move').innerHTML= show;
+		$('#new_move').find('.item_rating').each(function(i,elem){
+			var num = $(this).data("rating");
+			numStart($(this),num);
+		});
+	});
+
+	function numStart(obj,num){
+		if (num==00) {
+			obj.html('暂无评分')
+		}
+		if (num>=10) {
+			obj.find('li').first().addClass('yellow-star');
+		};
+		if (num>=20) {
+			obj.find('li').eq(0).addClass('yellow-star');
+			obj.find('li').eq(1).addClass('yellow-star');
+		};
+		if (num>=30) {
+			obj.find('li').eq(0).addClass('yellow-star');
+			obj.find('li').eq(1).addClass('yellow-star');
+			obj.find('li').eq(2).addClass('yellow-star');
+		};
+		if (num>=40) {
+			obj.find('li').eq(0).addClass('yellow-star');
+			obj.find('li').eq(1).addClass('yellow-star');
+			obj.find('li').eq(2).addClass('yellow-star');
+			obj.find('li').eq(3).addClass('yellow-star');
+		};
+	};
+
+
+	//判断点击的是哪一个选项的更多
+	// $('#move_show a').attr({
+	// 	'href': 'morelist.html?search=in_theaters'
+	// });
 	//院线热映的数据
 	// $.getJSON('http://api.douban.com/v2/movie/in_theaters?start=0&count=8&callback=?', function(data) {
 	// 	var itemArr = data.subjects;	

@@ -21,5 +21,6 @@ $(function(){
 			$('.TalioSeach').show();
 			$('.TalioLayer').show();
 		};
-	})
+	});
+	
 });
